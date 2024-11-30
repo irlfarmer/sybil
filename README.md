@@ -119,11 +119,29 @@ npx hardhat compile
 
 ## API Endpoints
 
-### Backend Routes
-- `POST /api/verify`: Submit wallet for verification
-- `POST /api/mint`: Mint new Soulbound NFT
-- `GET /api/nft/:id`: Get NFT details
-- `GET /api/verify/status/:address`: Check verification status
+### Backend Analysis Routes
+- `GET /api/humanity-score/:walletAddress`: Get the human behavior score for a wallet
+- `GET /api/cluster-analysis/:walletAddress`: Get cluster analysis results for related accounts
+- `GET /api/sybil-activity/:walletAddress/:contractAddress`: Analyze Sybil activity for a wallet's interaction with a specific contract
+
+### Response Format
+Each endpoint returns encrypted analysis data that includes:
+- Verification scores
+- Analysis timestamps
+- Detailed metrics
+- Risk assessments
+
+### Example Usage
+```bash
+# Get humanity score for a wallet
+curl http://localhost:5000/api/humanity-score/0x123...
+
+# Get cluster analysis
+curl http://localhost:5000/api/cluster-analysis/0x123...
+
+# Check Sybil activity
+curl http://localhost:5000/api/sybil-activity/0x123.../0x456...
+```
 
 ## Security Considerations
 - Private keys stored securely
@@ -184,4 +202,33 @@ Common issues and solutions:
    - Ensure all required data is submitted
    - Check backend services are running
    - Verify API endpoints are accessible
+
+## Batch Analysis
+
+### Analyze Addresses Script
+You can analyze multiple addresses at once using the provided script:
+
+```bash
+# Navigate to backend scripts directory
+cd backend/src/scripts
+
+# Run the analysis script
+node analyzeAddresses.js
+```
+
+The script reads addresses from `airdrop_list/uniswap.txt` and processes them through the humanity score analysis. This is useful for:
+- Batch processing large lists of addresses
+- Pre-screening airdrop recipients
+- Generating bulk analytics reports
+
+### Configuration
+- Input file path can be modified in the script (default: 'airdrop_list/uniswap.txt')
+- Results are logged with detailed analysis for each address
+- Errors are handled gracefully with debug logging
+
+### Example Usage
+1. Create a text file with addresses (one per line)
+2. Update the file path in the script if needed
+3. Run the script
+4. Check the logs for analysis results
 
