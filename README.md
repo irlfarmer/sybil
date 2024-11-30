@@ -31,7 +31,6 @@ sybil/
 ## Installation & Setup
 
 ### 1. Clone Repository
-ash
 git clone 
 cd sybil
 
